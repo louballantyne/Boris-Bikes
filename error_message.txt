@@ -1,0 +1,6 @@
+type: NameError
+path: (irb):1
+full path: /Library/Ruby/Gems/2.6.0/gems/irb-1.0.0/exe/irb:11:in `<top (required)>'
+line number: 1
+meaning: constant/class doesn't existation
+solution: create a class of that name
