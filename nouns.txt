@@ -1,6 +1,6 @@
 ## User Stories:
 
-As a ,
+As a person,
 So that I can use a bike,
 I'd like a docking station to release a bike.
 
@@ -11,6 +11,20 @@ I'd like to see if a bike is working
 ## Nouns:
 person
 bike 
-docking station
+docking station (dock)
 
 ## Verbs:
+use
+release
+see
+working
+
+## Table:
+
+Objects |  Messagese
+---------------------
+person  |
+bike    |  use
+        |  is_working?
+dock    |  release_bike
+
