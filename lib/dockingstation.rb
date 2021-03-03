@@ -7,7 +7,7 @@ attr_reader :docking_station, :bike
   end
 
   def release_bike
-  	 @bike = Bike.new
+  	 @docking_station.empty? ? (raise "No bike") : @docking_station.last
   end
 
   def return_bike(bike)
@@ -19,7 +19,3 @@ attr_reader :docking_station, :bike
   end
 
 end
-
-dock = DockingStation.new
-puts dock
-puts dock.empty?
