@@ -16,12 +16,16 @@ alias_method :bike, :subject
 	it 'working?' do
   	  expect(bike).to be_working
     end
+	it 'flags a bike as broken if it is reported' do
+		expect(bike).to respond_to(:broken?)
+	end
 end
 
 
 describe DockingStation do
 	alias_method :dock, :subject
   	
+
 	describe 'it returns a bike' do
 		it 'docks a bike' do
 			expect(dock).to respond_to(:return_bike).with(1).argument
@@ -43,6 +47,12 @@ describe DockingStation do
 			dock.return_bike(bike)
 		expect(dock.release_bike).to eq bike
 	  	end
+		it "won't release a broken bike" do
+			bike = Bike.new
+			bike.broken?
+			dock.return_bike(bike)
+			expect{dock.release_bike}.to raise_error "No working bikes"
+		end
 	end
 
 	describe 'capacity' do
