@@ -30,6 +30,21 @@ class DockingStation
     @docking_station
   end
 
+  def release_broken_bikes
+    broken_bikes = Array.new
+    @docking_station.each do |bike|
+      if !bike.working?
+        broken_bikes << bike
+        @docking_station.delete(bike)
+      end
+    end
+    broken_bikes
+  end
+
+  def receive_fixed_bikes (fixed)
+    @docking_station += fixed
+  end
+
   private
 
   def full?
