@@ -11,7 +11,8 @@ attr_reader :docking_station, :bike
   end
 
   def return_bike(bike)
-    @docking_station << bike
+    
+    @docking_station.empty? == false ? (raise "Docking Station full") : @docking_station << bike
   end
 
   def show_bikes
