@@ -7,19 +7,8 @@ require 'dockingstation'
 #	end
 # end
 
-describe Bike do
-alias_method :bike, :subject
+# Test refers to bike in every example except for when testing the initialize method
 
-	it 'is of class Bike' do
-	  expect(bike).to be_instance_of Bike
-	end
-	it 'working?' do
-  	  expect(bike).to be_working
-    end
-	it 'flags a bike as broken if it is reported' do
-		expect(bike).to respond_to(:broken?)
-	end
-end
 
 
 describe DockingStation do
@@ -31,7 +20,7 @@ describe DockingStation do
 			expect(dock).to respond_to(:return_bike).with(1).argument
 		end
 		it 'raises an error if the dock contains a bike and somebody tries to dock a bike' do
-			DockingStation::DEFAULT_CAPACITY.times {dock.return_bike(Bike.new)}
+			DockingStation::DEFAULT_CAPACITY.times {dock.return_bike(double(:bike))}
 			expect {dock.return_bike(Bike.new)}.to raise_error "Docking Station full"
 		end
 	end
@@ -43,14 +32,12 @@ describe DockingStation do
 			expect {dock.release_bike}.to raise_error "No bike"
 		end
 		it 'releases a bike if the docking station is not empty' do
-			bike = Bike.new
-			dock.return_bike(bike)
-		expect(dock.release_bike).to eq bike
+			dock.return_bike(double(:bike))
+			expect(dock.release_bike).to eq bike
 	  	end
 		it "won't release a broken bike" do
-			bike = Bike.new
-			bike.broken?
-			dock.return_bike(bike)
+			double(:bike).broken?
+			dock.return_bike(double(:bike))
 			expect{dock.release_bike}.to raise_error "No working bikes"
 		end
 	end
@@ -62,8 +49,8 @@ describe DockingStation do
 
 		it 'test capacity' do
 			new_dock = DockingStation.new(10)
-			10.times { new_dock.return_bike(Bike.new) }
-			expect {new_dock.return_bike(Bike.new)}.to raise_error "Docking Station full"
+			10.times { new_dock.return_bike(double(:bike)) }
+			expect {new_dock.return_bike(double(:bike))}.to raise_error "Docking Station full"
 		end
 	end
 

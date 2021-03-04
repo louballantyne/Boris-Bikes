@@ -10,7 +10,16 @@ class DockingStation
   end
 
   def release_bike
-  	empty?  ? (raise "No bike") : @docking_station.last.working? ? @docking_station.last : (fail "No working bikes")
+  	if empty?  
+      raise "No bike"
+    else
+      if @docking_station.last.working? 
+
+        @docking_station.pop
+      else
+        fail "No working bikes"
+      end
+    end
   end
 
   def return_bike(bike)
