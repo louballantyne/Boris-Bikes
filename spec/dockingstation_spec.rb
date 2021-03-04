@@ -31,13 +31,18 @@ describe DockingStation do
 		it 'raises an error if the dock is empty' do
 			expect {dock.release_bike}.to raise_error "No bike"
 		end
+		
+		let(:bike) {double :bike}
+		
 		it 'releases a bike if the docking station is not empty' do
-			dock.return_bike(double(:bike))
+			allow(bike).to receive(:working?).and_return(true)
+			dock.return_bike(bike)
 			expect(dock.release_bike).to eq bike
 	  	end
 		it "won't release a broken bike" do
-			double(:bike).broken?
-			dock.return_bike(double(:bike))
+			allow(bike).to receive(:working?).and_return(false)
+			#double(:bike).broken?
+			dock.return_bike(bike)
 			expect{dock.release_bike}.to raise_error "No working bikes"
 		end
 	end
