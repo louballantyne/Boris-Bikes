@@ -21,27 +21,28 @@ end
 
 describe DockingStation do
 	alias_method :dock, :subject
+  	
+	describe 'it returns a bike' do
+		it 'docks a bike' do
+			expect(dock).to respond_to(:return_bike).with(1).argument
+		end
+		it 'raises an error if the dock contains a bike and somebody tries to dock a bike' do
+			20.times {dock.return_bike(Bike.new)}
+			expect {dock.return_bike(Bike.new)}.to raise_error "Docking Station full"
+		end
+	end
 
-  	it {  expect(dock).to respond_to :release_bike }
-	it 'raises an error if the dock is empty' do
-		expect {dock.release_bike}.to raise_error "No bike"
-	end
-  
-	it 'docks a bike' do
-		expect(dock).to respond_to(:return_bike).with(1).argument
-	end
+	
 	describe 'release bike' do
-		it 'releases a bike if the docking station is empty' do
+		it {  expect(dock).to respond_to :release_bike }
+		it 'raises an error if the dock is empty' do
+			expect {dock.release_bike}.to raise_error "No bike"
+		end
+		it 'releases a bike if the docking station is not empty' do
 			bike = Bike.new
 			dock.return_bike(bike)
 		expect(dock.release_bike).to eq bike
 	  	end
-		it 'raises an error if the dock contains a bike and somebody tries to dock a bike' do
-			bike = Bike.new
-			dock.return_bike(bike)
-			bike2 = Bike.new
-			expect {dock.return_bike(bike2)}.to raise_error "Docking Station full"
-		end
 	end
 end
 
