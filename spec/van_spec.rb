@@ -3,7 +3,7 @@ require 'dockingstation'
 require 'bike'
 
 describe Van do
-    it {is_expected.to respond_to(:take_broken).with(2).argument}
+    it {is_expected.to respond_to(:take_broken_bikes).with(2).argument}
     
     ds = DockingStation.new
 

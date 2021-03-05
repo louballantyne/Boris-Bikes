@@ -1,6 +1,6 @@
 class Garage
     
-    def receive_brokens (broken_bikes)
+    def receive_broken_bikes (broken_bikes)
         @bikes = broken_bikes
     end
 

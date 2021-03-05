@@ -41,8 +41,8 @@ class DockingStation
     broken_bikes
   end
 
-  def receive_fixed_bikes (fixed)
-    @docking_station += fixed
+  def receive_fixed_bikes (fixed_bikes)
+    @docking_station += fixed_bikes
   end
 
   private
